@@ -1,0 +1,15 @@
+C:\Users\retan\source\repos\Curso_ASP\CapaDominio\bin\Debug\net8.0\CapaDominio.deps.json
+C:\Users\retan\source\repos\Curso_ASP\CapaDominio\bin\Debug\net8.0\CapaDominio.dll
+C:\Users\retan\source\repos\Curso_ASP\CapaDominio\bin\Debug\net8.0\CapaDominio.pdb
+C:\Users\retan\source\repos\Curso_ASP\CapaDominio\bin\Debug\net8.0\CapaEntidades.dll
+C:\Users\retan\source\repos\Curso_ASP\CapaDominio\bin\Debug\net8.0\CapaEntidades.pdb
+C:\Users\retan\source\repos\Curso_ASP\CapaDominio\obj\Debug\net8.0\CapaDominio.csproj.AssemblyReference.cache
+C:\Users\retan\source\repos\Curso_ASP\CapaDominio\obj\Debug\net8.0\CapaDominio.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\retan\source\repos\Curso_ASP\CapaDominio\obj\Debug\net8.0\CapaDominio.AssemblyInfoInputs.cache
+C:\Users\retan\source\repos\Curso_ASP\CapaDominio\obj\Debug\net8.0\CapaDominio.AssemblyInfo.cs
+C:\Users\retan\source\repos\Curso_ASP\CapaDominio\obj\Debug\net8.0\CapaDominio.csproj.CoreCompileInputs.cache
+C:\Users\retan\source\repos\Curso_ASP\CapaDominio\obj\Debug\net8.0\CapaDomi.E1A321AB.Up2Date
+C:\Users\retan\source\repos\Curso_ASP\CapaDominio\obj\Debug\net8.0\CapaDominio.dll
+C:\Users\retan\source\repos\Curso_ASP\CapaDominio\obj\Debug\net8.0\refint\CapaDominio.dll
+C:\Users\retan\source\repos\Curso_ASP\CapaDominio\obj\Debug\net8.0\CapaDominio.pdb
+C:\Users\retan\source\repos\Curso_ASP\CapaDominio\obj\Debug\net8.0\ref\CapaDominio.dll

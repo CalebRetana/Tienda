@@ -1,0 +1,79 @@
+﻿@model CapaEntidades.CapaEntidades.Usuario
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 style="display: flex; justify-content:center;">Crear</h1>
+
+<h4 style="display: flex; justify-content:center;">Usuario</h4>
+<hr />
+<div class="row" style="display: flex; justify-content:center;">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdUsuario" />
+            <div class="form-group">
+                <label asp-for="Nombres" class="control-label"></label>
+                <input asp-for="Nombres" class="form-control" />
+                <span asp-validation-for="Nombres" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Apellidos" class="control-label"></label>
+                <input asp-for="Apellidos" class="form-control" />
+                <span asp-validation-for="Apellidos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Correo" class="control-label"></label>
+                <input asp-for="Correo" class="form-control" />
+                <span asp-validation-for="Correo" class="text-danger"></span>
+            </div>
+            <label class="control-label">Cuenta</label>
+            <div class="form-check form-switch">
+                
+                @Html.CheckBox("Activo", Model.Activo ?? false, new { @class = "form-check-input", id = "flexSwitchCheckDefault" })
+                <label class="form-check-label" for="flexSwitchCheckDefault" id="switchLabel">
+                    @if (Model.Activo ?? false)
+                    {
+                        <span class="badge bg-success">Activa</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Desactiva</span>
+                    }
+                </label>
+                @Html.ValidationMessageFor(model => model.Activo, "", new { @class = "text-danger" })
+            </div>
+
+
+            <div class="form-group mt-5">
+                <input type="submit" value="Guardar" class="btn btn-success" />
+                <a class="btn btn-danger" asp-action="Index">Regresar</a>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    
+    var checkbox = document.getElementById('flexSwitchCheckDefault');
+    var label = document.getElementById('switchLabel');
+
+    
+    checkbox.addEventListener('change', function () {
+        var badge = label.querySelector('span');
+
+        
+        if (checkbox.checked) {
+            badge.classList.remove('bg-danger');
+            badge.classList.add('bg-success');
+            badge.textContent = 'Activa';
+        } else {
+            badge.classList.remove('bg-success');
+            badge.classList.add('bg-danger');
+            badge.textContent = 'Desactiva';
+        }
+    });
+</script>
+
+

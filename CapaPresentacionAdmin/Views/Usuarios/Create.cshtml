@@ -1,0 +1,50 @@
+﻿@model CapaEntidades.CapaEntidades.Usuario
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 style="display: flex; justify-content:center;">Crear</h1>
+
+<h4 style="display: flex; justify-content:center;">Usuario</h4>
+<hr />
+<div class="row" style="display: flex; justify-content:center;" >
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nombres" class="control-label"></label>
+                <input asp-for="Nombres" class="form-control" />
+                <span asp-validation-for="Nombres" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Apellidos" class="control-label"></label>
+                <input asp-for="Apellidos" class="form-control" />
+                <span asp-validation-for="Apellidos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Correo" class="control-label"></label>
+                <input asp-for="Correo" class="form-control" />
+                <span asp-validation-for="Correo" class="text-danger"></span>
+            </div>
+            <div class="form-group m-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a class="btn btn-danger" asp-action="Index">Regresar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="/js/loadingoverlay.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("form").on("submit", function () {
+            $.LoadingOverlay("show", 
+            {
+                text: "Cargando..."
+            });
+        });
+    });
+</script>
