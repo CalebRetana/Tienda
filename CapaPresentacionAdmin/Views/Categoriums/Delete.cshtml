@@ -5,14 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Eliminar</h1>
-
-<h3>¿Estás seguro que quieres eliminar @Html.DisplayFor(Model=>Model.Descripcion)?</h3>
-<div>
+<h3 style="display: flex; justify-content:center;">¿Estás seguro que quieres eliminar @Html.DisplayFor(Model => Model.Descripcion)?</h3>
+<div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
     <h4>Categoria</h4>
-    <hr />
+    <hr style="width: 100%; max-width: 600px;" />
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <dl class="row">
+    <dl class="row" style="width: 100%; max-width: 600px;">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Descripcion)
         </dt>
@@ -23,17 +21,23 @@
             @Html.DisplayNameFor(model => model.Activo)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Activo)
+             @if(Model.Activo == true)
+            {
+                <span class="badge bg-success">Sí</span>
+            }
+            else if(Model.Activo  == false)
+            {
+                <span class="badge bg-danger">No</span>
+            }
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaRegistro)
+            Fecha Registro
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.FechaRegistro)
         </dd>
     </dl>
-    
-    <form asp-action="Delete">
+<form asp-action="Delete">
         <input type="hidden" asp-for="IdCategoria" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a class="btn btn-info" asp-action="Index">Cancelar</a>

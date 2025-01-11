@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 style="display: flex; justify-content:center;">Crear</h1>
+<h1 style="display: flex; justify-content:center;">Editar</h1>
 
 <h4 style="display: flex; justify-content:center;">Usuario</h4>
 <hr />
@@ -31,7 +31,6 @@
             </div>
             <label class="control-label">Cuenta</label>
             <div class="form-check form-switch">
-                
                 @Html.CheckBox("Activo", Model.Activo ?? false, new { @class = "form-check-input", id = "flexSwitchCheckDefault" })
                 <label class="form-check-label" for="flexSwitchCheckDefault" id="switchLabel">
                     @if (Model.Activo ?? false)

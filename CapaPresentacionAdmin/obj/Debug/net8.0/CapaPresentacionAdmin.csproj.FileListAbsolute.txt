@@ -290,3 +290,4 @@ C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\obj\Debug\net8.0\Cap
 C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\obj\Debug\net8.0\ref\CapaPresentacionAdmin.dll
 C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\bin\Debug\net8.0\CapaDominio.dll
 C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\bin\Debug\net8.0\CapaDominio.pdb
+C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\obj\Debug\net8.0\CapaPresentacionAdmin.sourcelink.json

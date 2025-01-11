@@ -105,30 +105,47 @@ namespace CapaPresentacionAdmin.Controllers.Mantenedor
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdCategoria,Descripcion,Activo,FechaRegistro")] Categorium categorium)
         {
-            if (id != categorium.IdCategoria)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(categorium);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CategoriumExists(categorium.IdCategoria))
+            try 
+            { 
+                    if (id != categorium.IdCategoria)
                     {
                         return NotFound();
                     }
+
+               if (ModelState.IsValid)
+               {
+                    var existeCategoria = await _context.Categoria
+                                    .FirstOrDefaultAsync(c => c.Descripcion == categorium.Descripcion && c.IdCategoria != categorium.IdCategoria);
+                    if (existeCategoria == null) 
+                  { 
+                    try
+                    {
+                      _context.Update(categorium);
+                       await _context.SaveChangesAsync();
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                       if (!CategoriumExists(categorium.IdCategoria))
+                       {
+                          return NotFound();
+                       }
+                       else
+                       {
+                        throw;
+                       }
+                    }
+                     return RedirectToAction(nameof(Index));
+                  }
                     else
                     {
-                        throw;
+                        ModelState.AddModelError(string.Empty, $"La categoria ya existe");
+                        return View(categorium);
                     }
-                }
-                return RedirectToAction(nameof(Index));
+                }      
+                    
+            }catch (Exception ex){
+                ModelState.AddModelError(string.Empty, $"Ocurrió un error: {ex.Message}");
+                return View(categorium);
             }
             return View(categorium);
         }
@@ -173,14 +190,17 @@ namespace CapaPresentacionAdmin.Controllers.Mantenedor
                else
                {
                   ModelState.AddModelError(string.Empty, $"No puedes eliminar. Ya has agreagdo productos, trata desactivando esta categoria");
-               }
+                    return View(categorium);
+                }
 
             }
             catch (Exception ex) 
             {
+                var categorium = await _context.Categoria.FindAsync(id);
                 ModelState.AddModelError(string.Empty, $"Ocurrió un error: {ex.Message}");
+                return View(categorium);
             }
-            return View();
+            
         }
 
         private bool CategoriumExists(int id)
