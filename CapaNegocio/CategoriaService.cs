@@ -28,5 +28,17 @@ namespace CapaNegocio
             int validacion = await _categoriaRepository.ValidarEliminar(categoria);
             return validacion;
         }
+        public async Task<(int resultado, string mensaje)> validaCamposVacios(Categorium categoria)
+        {
+            if (string.IsNullOrEmpty(categoria.Descripcion))
+            {
+                return (0, "La descripción no puede estar vacía.");
+            }
+            if (categoria.Activo == null)
+            {
+                return (0, "Debe seleccionar una opción para activo");
+            }
+            return (1, string.Empty);
+        }
     }
 }

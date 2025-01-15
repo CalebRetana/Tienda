@@ -65,9 +65,18 @@ namespace CapaPresentacionAdmin.Controllers.Mantenedor
                     var resultado = await _categoria._validarCategoria(categorium);
                     if (resultado == 1)
                     {
-                        _context.Add(categorium);
-                        await _context.SaveChangesAsync();
-                        return RedirectToAction(nameof(Index));
+                        var (respuesta, mensaje) = await _categoria.validaCamposVacios(categorium);
+                        if (respuesta == 1)
+                        {
+                            _context.Add(categorium);
+                            await _context.SaveChangesAsync();
+                            return RedirectToAction(nameof(Index));
+                        }
+                        else
+                        {
+                            ModelState.AddModelError(string.Empty, mensaje);
+                            return View(categorium);
+                        }
                     }
                     else
                     {
@@ -117,25 +126,34 @@ namespace CapaPresentacionAdmin.Controllers.Mantenedor
                     var existeCategoria = await _context.Categoria
                                     .FirstOrDefaultAsync(c => c.Descripcion == categorium.Descripcion && c.IdCategoria != categorium.IdCategoria);
                     if (existeCategoria == null) 
-                  { 
-                    try
-                    {
-                      _context.Update(categorium);
-                       await _context.SaveChangesAsync();
-                    }
-                    catch (DbUpdateConcurrencyException)
-                    {
-                       if (!CategoriumExists(categorium.IdCategoria))
-                       {
-                          return NotFound();
-                       }
-                       else
-                       {
-                        throw;
-                       }
-                    }
-                     return RedirectToAction(nameof(Index));
-                  }
+                     { 
+                        try
+                        {
+                                var (resultado, mensaje) = await _categoria.validaCamposVacios(categorium);
+                                if (resultado == 1)
+                                {
+                                    _context.Update(categorium);
+                                    await _context.SaveChangesAsync();
+                                }
+                                else
+                                {
+                                    ModelState.AddModelError(string.Empty, mensaje);
+                                    return View(categorium);
+                                }
+                            }
+                        catch (DbUpdateConcurrencyException)
+                        {
+                           if (!CategoriumExists(categorium.IdCategoria))
+                           {
+                              return NotFound();
+                           }
+                           else
+                           {
+                            throw;
+                           }
+                        }
+                         return RedirectToAction(nameof(Index));
+                     }
                     else
                     {
                         ModelState.AddModelError(string.Empty, $"La categoria ya existe");

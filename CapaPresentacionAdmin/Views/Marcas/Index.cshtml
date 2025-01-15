@@ -4,45 +4,77 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Activo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaRegistro)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Activo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaRegistro)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdMarca">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdMarca">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdMarca">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<head>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+</head>
+<h1>Marcas</h1>
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-list me-3"></i>Marcas
+    </div>
+    <div class="card-body">
+        <p>
+            <a asp-action="Create" class="btn btn-success mt-1 mb-2">Nueva Marca</a>
+        </p>
+        <table id="MarcaTable" class="table table-striped nowrap" style="width:100%; text-align: center; vertical-align: middle;">
+            <thead >
+                <tr >
+                    <th style="text-align: center; vertical-align: middle;">
+                        @Html.DisplayNameFor(model => model.Descripcion)
+                    </th>
+                    <th style="text-align: center; vertical-align: middle;">
+                        @Html.DisplayNameFor(model => model.Activo)
+                    </th>
+                    <th style="text-align: center; vertical-align: middle;">
+                        Acciones
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Descripcion)
+                        </td>
+                        <td>
+                            @if (item.Activo == true)
+                            {
+                                <span class="badge bg-success">Sí </span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">No </span>
+                            }
+                        </td>
+                        <td >
+                            <a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.IdMarca">
+                                <i class="fas fa-pen-to-square"></i>
+                            </a> |
+                            <a asp-action="Details" class="btn btn-primary" asp-route-id="@item.IdMarca">
+                                <i class="fas fa-eye"></i>
+                            </a> |
+                            <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.IdMarca">
+                                <i class="fas fa-trash-can"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#MarcaTable').DataTable({
+            responsive: true,
+            language: {
+                url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-MX.json"
+            }
+        });
+    });
+</script>

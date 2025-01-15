@@ -20,30 +20,28 @@
         <p>
             <a asp-action="Create" class="btn btn-success mt-1 mb-2">Nueva Categoria</a>
         </p>
-        <table id="usuariosTable" class="table table-striped nowrap" style="width:100%">
+        <table id="categoriaTable" class="table table-striped nowrap" style="width:100%; text-align: center; vertical-align: middle;">
             <thead>
                 <tr>
-                    <th>
-                        Descripción
+                    <th style="text-align: center; vertical-align: middle;">
+                        Categoria
                     </th>
-                    <th>
+                    <th style="text-align: center; vertical-align: middle;">
                         Estado
                     </th>
-                    <th>
-                        Fecha Registro
-                    </th>
-                    <th>
+                    <th style="text-align: center; vertical-align: middle;">
                         Acciones
                     </th>
                 </tr>
             </thead>
             <tbody>
-        @foreach (var item in Model) {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Descripcion)
-                    </td>
-                    <td>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Descripcion)
+                        </td>
+                        <td>
                             @if (item.Activo == true)
                             {
                                 <span class="badge bg-success">Activo </span>
@@ -52,12 +50,9 @@
                             {
                                 <span class="badge bg-danger">Desactivada</span>
                             }
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FechaRegistro)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.IdCategoria">
+                        </td>
+                        <td>
+                            <a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.IdCategoria">
                                 <i class="fas fa-pen-to-square"></i>
                             </a> |
                             <a asp-action="Details" class="btn btn-primary" asp-route-id="@item.IdCategoria">
@@ -65,17 +60,17 @@
                             </a> |
                             <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.IdCategoria">
                                 <i class="fas fa-trash-can"></i>
-                                </a>
-                    </td>
-                </tr>
-        }
+                            </a>
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
-     </div>
+    </div>
 </div>
 <script>
     $(document).ready(function () {
-        $('#usuariosTable').DataTable({
+        $('#categoriaTable').DataTable({
             responsive: true,
             language: {
                 url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-MX.json"

@@ -17,3 +17,4 @@ C:\Users\retan\source\repos\Curso_ASP\CapaDatos\obj\Debug\net8.0\CapaDatos.genru
 C:\Users\retan\source\repos\Curso_ASP\CapaDatos\obj\Debug\net8.0\ref\CapaDatos.dll
 C:\Users\retan\source\repos\Curso_ASP\CapaDatos\bin\Debug\net8.0\CapaDominio.dll
 C:\Users\retan\source\repos\Curso_ASP\CapaDatos\bin\Debug\net8.0\CapaDominio.pdb
+C:\Users\retan\source\repos\Curso_ASP\CapaDatos\obj\Debug\net8.0\CapaDatos.sourcelink.json

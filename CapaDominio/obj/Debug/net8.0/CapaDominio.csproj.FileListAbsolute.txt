@@ -13,3 +13,4 @@ C:\Users\retan\source\repos\Curso_ASP\CapaDominio\obj\Debug\net8.0\CapaDominio.d
 C:\Users\retan\source\repos\Curso_ASP\CapaDominio\obj\Debug\net8.0\refint\CapaDominio.dll
 C:\Users\retan\source\repos\Curso_ASP\CapaDominio\obj\Debug\net8.0\CapaDominio.pdb
 C:\Users\retan\source\repos\Curso_ASP\CapaDominio\obj\Debug\net8.0\ref\CapaDominio.dll
+C:\Users\retan\source\repos\Curso_ASP\CapaDominio\obj\Debug\net8.0\CapaDominio.sourcelink.json

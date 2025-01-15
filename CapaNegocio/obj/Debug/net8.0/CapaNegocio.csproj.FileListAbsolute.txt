@@ -19,3 +19,4 @@ C:\Users\retan\source\repos\Curso_ASP\CapaNegocio\obj\Debug\net8.0\CapaNegocio.g
 C:\Users\retan\source\repos\Curso_ASP\CapaNegocio\obj\Debug\net8.0\ref\CapaNegocio.dll
 C:\Users\retan\source\repos\Curso_ASP\CapaNegocio\bin\Debug\net8.0\CapaDominio.dll
 C:\Users\retan\source\repos\Curso_ASP\CapaNegocio\bin\Debug\net8.0\CapaDominio.pdb
+C:\Users\retan\source\repos\Curso_ASP\CapaNegocio\obj\Debug\net8.0\CapaNegocio.sourcelink.json
