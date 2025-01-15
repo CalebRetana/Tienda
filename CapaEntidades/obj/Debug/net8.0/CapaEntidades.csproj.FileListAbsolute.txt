@@ -7,9 +7,9 @@ C:\Users\retan\source\repos\Curso_ASP\CapaEntidades\obj\Debug\net8.0\CapaEntidad
 C:\Users\retan\source\repos\Curso_ASP\CapaEntidades\obj\Debug\net8.0\CapaEntidades.AssemblyInfoInputs.cache
 C:\Users\retan\source\repos\Curso_ASP\CapaEntidades\obj\Debug\net8.0\CapaEntidades.AssemblyInfo.cs
 C:\Users\retan\source\repos\Curso_ASP\CapaEntidades\obj\Debug\net8.0\CapaEntidades.csproj.CoreCompileInputs.cache
+C:\Users\retan\source\repos\Curso_ASP\CapaEntidades\obj\Debug\net8.0\CapaEntidades.sourcelink.json
 C:\Users\retan\source\repos\Curso_ASP\CapaEntidades\obj\Debug\net8.0\CapaEntidades.dll
 C:\Users\retan\source\repos\Curso_ASP\CapaEntidades\obj\Debug\net8.0\refint\CapaEntidades.dll
 C:\Users\retan\source\repos\Curso_ASP\CapaEntidades\obj\Debug\net8.0\CapaEntidades.pdb
 C:\Users\retan\source\repos\Curso_ASP\CapaEntidades\obj\Debug\net8.0\CapaEntidades.genruntimeconfig.cache
 C:\Users\retan\source\repos\Curso_ASP\CapaEntidades\obj\Debug\net8.0\ref\CapaEntidades.dll
-C:\Users\retan\source\repos\Curso_ASP\CapaEntidades\obj\Debug\net8.0\CapaEntidades.sourcelink.json

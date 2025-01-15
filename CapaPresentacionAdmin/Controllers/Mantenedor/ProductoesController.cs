@@ -22,7 +22,7 @@ namespace CapaPresentacionAdmin.Controllers.Mantenedor
         // GET: Productoes
         public async Task<IActionResult> Index()
         {
-            var dbcarritoContext = _context.Productos.Include(p => p.categoria).Include(p => p.IdMarcaNavigation);
+            var dbcarritoContext = _context.Productos.Include(p => p.categoria).Include(p => p.Marca);
             return View(await dbcarritoContext.ToListAsync());
         }
 
@@ -36,7 +36,7 @@ namespace CapaPresentacionAdmin.Controllers.Mantenedor
 
             var producto = await _context.Productos
                 .Include(p => p.categoria)
-                .Include(p => p.IdMarcaNavigation)
+                .Include(p => p.Marca)
                 .FirstOrDefaultAsync(m => m.IdProducto == id);
             if (producto == null)
             {
@@ -61,14 +61,23 @@ namespace CapaPresentacionAdmin.Controllers.Mantenedor
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdProducto,Nombre,Descripcion,Precio,Stock,RutaImagen,NombreImagen,Activo,FechaRegistro,IdMarca,IdCategoria")] Producto producto)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(producto);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+
+                    _context.Add(producto);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                ViewData["IdCategoria"] = new SelectList(_context.Categoria, "IdCategoria", "Descripcion", producto.IdCategoria);
+                ViewData["IdMarca"] = new SelectList(_context.Marcas, "IdMarca", "Descripcion", producto.IdMarca);
+                return View(producto);
             }
-            ViewData["IdCategoria"] = new SelectList(_context.Categoria, "IdCategoria", "Descripcion", producto.IdCategoria);
-            ViewData["IdMarca"] = new SelectList(_context.Marcas, "IdMarca", "Descripcion", producto.IdMarca);
+            catch (Exception ex) 
+            {
+                ModelState.AddModelError(string.Empty, $"Ocurrió un error: {ex.Message}");
+            }
             return View(producto);
         }
 
@@ -85,8 +94,8 @@ namespace CapaPresentacionAdmin.Controllers.Mantenedor
             {
                 return NotFound();
             }
-            ViewData["IdCategoria"] = new SelectList(_context.Categoria, "IdCategoria", "IdCategoria", producto.IdCategoria);
-            ViewData["IdMarca"] = new SelectList(_context.Marcas, "IdMarca", "IdMarca", producto.IdMarca);
+            ViewData["IdCategoria"] = new SelectList(_context.Categoria, "IdCategoria", "Descripcion");
+            ViewData["IdMarca"] = new SelectList(_context.Marcas, "IdMarca", "Descripcion");
             return View(producto);
         }
 
@@ -122,8 +131,8 @@ namespace CapaPresentacionAdmin.Controllers.Mantenedor
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdCategoria"] = new SelectList(_context.Categoria, "IdCategoria", "IdCategoria", producto.IdCategoria);
-            ViewData["IdMarca"] = new SelectList(_context.Marcas, "IdMarca", "IdMarca", producto.IdMarca);
+            ViewData["IdCategoria"] = new SelectList(_context.Categoria, "IdCategoria", "Descripcion");
+            ViewData["IdMarca"] = new SelectList(_context.Marcas, "IdMarca", "Descripcion");
             return View(producto);
         }
 
@@ -137,7 +146,7 @@ namespace CapaPresentacionAdmin.Controllers.Mantenedor
 
             var producto = await _context.Productos
                 .Include(p => p.categoria)
-                .Include(p => p.IdMarcaNavigation)
+                .Include(p => p.Marca)
                 .FirstOrDefaultAsync(m => m.IdProducto == id);
             if (producto == null)
             {

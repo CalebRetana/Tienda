@@ -34,33 +34,28 @@
                 <input asp-for="Stock" class="form-control" />
                 <span asp-validation-for="Stock" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="RutaImagen" class="control-label"></label>
-                <input asp-for="RutaImagen" class="form-control" />
-                <span asp-validation-for="RutaImagen" class="text-danger"></span>
+            <label class="control-label">Activo</label>
+            <div class="form-check form-switch">
+                @Html.CheckBox("Activo", Model.Activo ?? false, new { @class = "form-check-input", id = "flexSwitchCheckDefault" })
+                <label class="form-check-label" for="flexSwitchCheckDefault" id="switchLabel">
+                    @if (Model.Activo ?? false)
+                    {
+                        <span class="badge bg-success">Sí</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">No</span>
+                    }
+                </label>
+                @Html.ValidationMessageFor(model => model.Activo, "", new { @class = "text-danger" })
             </div>
             <div class="form-group">
-                <label asp-for="NombreImagen" class="control-label"></label>
-                <input asp-for="NombreImagen" class="form-control" />
-                <span asp-validation-for="NombreImagen" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Activo" class="control-label"></label>
-                <input asp-for="Activo" class="form-control" />
-                <span asp-validation-for="Activo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FechaRegistro" class="control-label"></label>
-                <input asp-for="FechaRegistro" class="form-control" />
-                <span asp-validation-for="FechaRegistro" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdMarca" class="control-label"></label>
+                <label class="control-label">Marca</label>
                 <select asp-for="IdMarca" class="form-control" asp-items="ViewBag.IdMarca"></select>
                 <span asp-validation-for="IdMarca" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdCategoria" class="control-label"></label>
+                <label class="control-label">Categoria</label>
                 <select asp-for="IdCategoria" class="form-control" asp-items="ViewBag.IdCategoria"></select>
                 <span asp-validation-for="IdCategoria" class="text-danger"></span>
             </div>
@@ -72,7 +67,26 @@
     </div>
 </div>
 
-<div>
-    
-</div>
+<script>
+
+    var checkbox = document.getElementById('flexSwitchCheckDefault');
+    var label = document.getElementById('switchLabel');
+
+
+    checkbox.addEventListener('change', function () {
+        var badge = label.querySelector('span');
+
+
+        if (checkbox.checked) {
+            badge.classList.remove('bg-danger');
+            badge.classList.add('bg-success');
+            badge.textContent = 'SÍ';
+        } else {
+            badge.classList.remove('bg-success');
+            badge.classList.add('bg-danger');
+            badge.textContent = 'nO';
+        }
+    });
+</script>
+
 

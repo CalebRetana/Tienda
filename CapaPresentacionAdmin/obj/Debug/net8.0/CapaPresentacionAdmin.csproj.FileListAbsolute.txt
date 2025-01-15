@@ -259,11 +259,13 @@ C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\bin\Debug\net8.0\run
 C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
 C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\bin\Debug\net8.0\CapaDatos.dll
+C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\bin\Debug\net8.0\CapaDominio.dll
 C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\bin\Debug\net8.0\CapaEntidades.dll
 C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\bin\Debug\net8.0\CapaNegocio.dll
 C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\bin\Debug\net8.0\CapaDatos.pdb
 C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\bin\Debug\net8.0\CapaEntidades.pdb
 C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\bin\Debug\net8.0\CapaNegocio.pdb
+C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\bin\Debug\net8.0\CapaDominio.pdb
 C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\obj\Debug\net8.0\CapaPresentacionAdmin.csproj.AssemblyReference.cache
 C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\obj\Debug\net8.0\CapaPresentacionAdmin.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\obj\Debug\net8.0\CapaPresentacionAdmin.AssemblyInfoInputs.cache
@@ -272,6 +274,7 @@ C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\obj\Debug\net8.0\Cap
 C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\obj\Debug\net8.0\CapaPresentacionAdmin.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\obj\Debug\net8.0\CapaPresentacionAdmin.RazorAssemblyInfo.cache
 C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\obj\Debug\net8.0\CapaPresentacionAdmin.RazorAssemblyInfo.cs
+C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\obj\Debug\net8.0\CapaPresentacionAdmin.sourcelink.json
 C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\obj\Debug\net8.0\staticwebassets\msbuild.CapaPresentacionAdmin.Microsoft.AspNetCore.StaticWebAssets.props
@@ -288,6 +291,3 @@ C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\obj\Debug\net8.0\ref
 C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\obj\Debug\net8.0\CapaPresentacionAdmin.pdb
 C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\obj\Debug\net8.0\CapaPresentacionAdmin.genruntimeconfig.cache
 C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\obj\Debug\net8.0\ref\CapaPresentacionAdmin.dll
-C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\bin\Debug\net8.0\CapaDominio.dll
-C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\bin\Debug\net8.0\CapaDominio.pdb
-C:\Users\retan\source\repos\Curso_ASP\CapaPresentacionAdmin\obj\Debug\net8.0\CapaPresentacionAdmin.sourcelink.json

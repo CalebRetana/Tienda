@@ -259,7 +259,7 @@ public partial class DbcarritoContext : DbContext
                 .HasForeignKey(d => d.IdCategoria)
                 .HasConstraintName("FK_Productos_Categoria");
 
-            entity.HasOne(d => d.IdMarcaNavigation).WithMany(p => p.Productos)
+            entity.HasOne(d => d.Marca).WithMany(p => p.Productos)
                 .HasForeignKey(d => d.IdMarca)
                 .HasConstraintName("FK_Productos_Marca");
         });

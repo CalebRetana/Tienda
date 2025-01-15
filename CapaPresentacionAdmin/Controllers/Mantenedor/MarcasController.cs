@@ -48,7 +48,17 @@ namespace CapaPresentacionAdmin.Controllers.Mantenedor
         {
             return View();
         }
+        public async Task<bool> existeMarca(Marca marca)
+        {
+            var existe = await _context.Marcas
+                             .FirstOrDefaultAsync(m => m.Descripcion == marca.Descripcion && m.IdMarca != marca.IdMarca);
+            if (existe == null)
+            {
+                return false;
+            }
 
+            else return true;
+        }
         // POST: Marcas/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -56,13 +66,31 @@ namespace CapaPresentacionAdmin.Controllers.Mantenedor
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdMarca,Descripcion,Activo,FechaRegistro")] Marca marca)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(marca);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    var existe = await existeMarca(marca);
+                    if (!existe)
+                    {
+                        _context.Add(marca);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, $"La marca ya existe");
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, $"Ocurrió un error: {ex.Message}");
+                return View(marca);
             }
             return View(marca);
+
         }
 
         // GET: Marcas/Edit/5
@@ -88,30 +116,47 @@ namespace CapaPresentacionAdmin.Controllers.Mantenedor
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdMarca,Descripcion,Activo,FechaRegistro")] Marca marca)
         {
-            if (id != marca.IdMarca)
+            try
             {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
+                if (id != marca.IdMarca)
                 {
-                    _context.Update(marca);
-                    await _context.SaveChangesAsync();
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
+
+                if (ModelState.IsValid)
                 {
-                    if (!MarcaExists(marca.IdMarca))
+                    var existe = await existeMarca(marca);
+                    if (!existe)
                     {
-                        return NotFound();
+                        try
+                        {
+                            _context.Update(marca);
+                            await _context.SaveChangesAsync();
+                        }
+                        catch (DbUpdateConcurrencyException)
+                        {
+                            if (!MarcaExists(marca.IdMarca))
+                            {
+                                return NotFound();
+                            }
+                            else
+                            {
+                                throw;
+                            }
+                        }
+                        return RedirectToAction(nameof(Index));
                     }
                     else
                     {
-                        throw;
+                        ModelState.AddModelError(string.Empty, $"La marca ya existe");
+                        return View(marca);
                     }
                 }
-                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, $"Ocurrió un error: {ex.Message}");
+                return View(marca);
             }
             return View(marca);
         }

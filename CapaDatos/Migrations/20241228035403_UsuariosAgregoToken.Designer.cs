@@ -517,12 +517,12 @@ namespace CapaEntidades.Migrations
                         .HasForeignKey("IdCategoria")
                         .HasConstraintName("FK_Productos_Categoria");
 
-                    b.HasOne("CapaEntidades.CapaEntidades.Marca", "IdMarcaNavigation")
+                    b.HasOne("CapaEntidades.CapaEntidades.Marca", "Marca")
                         .WithMany("Productos")
                         .HasForeignKey("IdMarca")
                         .HasConstraintName("FK_Productos_Marca");
 
-                    b.Navigation("IdMarcaNavigation");
+                    b.Navigation("Marca");
 
                     b.Navigation("categoria");
                 });

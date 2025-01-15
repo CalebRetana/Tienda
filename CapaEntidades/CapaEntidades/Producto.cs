@@ -33,5 +33,5 @@ public partial class Producto
 
     public virtual Categorium? categoria { get; set; }
 
-    public virtual Marca? IdMarcaNavigation { get; set; }
+    public virtual Marca? Marca { get; set; }
 }

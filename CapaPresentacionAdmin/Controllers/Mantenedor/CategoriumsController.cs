@@ -85,7 +85,9 @@ namespace CapaPresentacionAdmin.Controllers.Mantenedor
 
 
                 }
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 ModelState.AddModelError(string.Empty, $"Ocurrió un error: {ex.Message}");
             }
             return View(categorium);
@@ -114,54 +116,56 @@ namespace CapaPresentacionAdmin.Controllers.Mantenedor
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdCategoria,Descripcion,Activo,FechaRegistro")] Categorium categorium)
         {
-            try 
-            { 
-                    if (id != categorium.IdCategoria)
-                    {
-                        return NotFound();
-                    }
+            try
+            {
+                if (id != categorium.IdCategoria)
+                {
+                    return NotFound();
+                }
 
-               if (ModelState.IsValid)
-               {
+                if (ModelState.IsValid)
+                {
                     var existeCategoria = await _context.Categoria
                                     .FirstOrDefaultAsync(c => c.Descripcion == categorium.Descripcion && c.IdCategoria != categorium.IdCategoria);
-                    if (existeCategoria == null) 
-                     { 
+                    if (existeCategoria == null)
+                    {
                         try
                         {
-                                var (resultado, mensaje) = await _categoria.validaCamposVacios(categorium);
-                                if (resultado == 1)
-                                {
-                                    _context.Update(categorium);
-                                    await _context.SaveChangesAsync();
-                                }
-                                else
-                                {
-                                    ModelState.AddModelError(string.Empty, mensaje);
-                                    return View(categorium);
-                                }
+                            var (resultado, mensaje) = await _categoria.validaCamposVacios(categorium);
+                            if (resultado == 1)
+                            {
+                                _context.Update(categorium);
+                                await _context.SaveChangesAsync();
                             }
+                            else
+                            {
+                                ModelState.AddModelError(string.Empty, mensaje);
+                                return View(categorium);
+                            }
+                        }
                         catch (DbUpdateConcurrencyException)
                         {
-                           if (!CategoriumExists(categorium.IdCategoria))
-                           {
-                              return NotFound();
-                           }
-                           else
-                           {
-                            throw;
-                           }
+                            if (!CategoriumExists(categorium.IdCategoria))
+                            {
+                                return NotFound();
+                            }
+                            else
+                            {
+                                throw;
+                            }
                         }
-                         return RedirectToAction(nameof(Index));
-                     }
+                        return RedirectToAction(nameof(Index));
+                    }
                     else
                     {
                         ModelState.AddModelError(string.Empty, $"La categoria ya existe");
                         return View(categorium);
                     }
-                }      
-                    
-            }catch (Exception ex){
+                }
+
+            }
+            catch (Exception ex)
+            {
                 ModelState.AddModelError(string.Empty, $"Ocurrió un error: {ex.Message}");
                 return View(categorium);
             }
@@ -195,7 +199,7 @@ namespace CapaPresentacionAdmin.Controllers.Mantenedor
             {
                 var categorium = await _context.Categoria.FindAsync(id);
                 var resultado = await _categoria.EliminarCategoria(categoria);
-                if(resultado == 1)
+                if (resultado == 1)
                 {
                     if (categorium != null)
                     {
@@ -205,20 +209,20 @@ namespace CapaPresentacionAdmin.Controllers.Mantenedor
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
-               else
-               {
-                  ModelState.AddModelError(string.Empty, $"No puedes eliminar. Ya has agreagdo productos, trata desactivando esta categoria");
+                else
+                {
+                    ModelState.AddModelError(string.Empty, $"No puedes eliminar. Ya has agreagdo productos, trata desactivando esta categoria");
                     return View(categorium);
                 }
 
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 var categorium = await _context.Categoria.FindAsync(id);
                 ModelState.AddModelError(string.Empty, $"Ocurrió un error: {ex.Message}");
                 return View(categorium);
             }
-            
+
         }
 
         private bool CategoriumExists(int id)
