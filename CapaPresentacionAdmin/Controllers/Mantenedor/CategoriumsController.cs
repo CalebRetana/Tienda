@@ -62,11 +62,13 @@ namespace CapaPresentacionAdmin.Controllers.Mantenedor
             {
                 if (ModelState.IsValid)
                 {
-                    var resultado = await _categoria._validarCategoria(categorium);
-                    if (resultado == 1)
+                    var (respuesta, mensaje) = await _categoria.validaCamposVacios(categorium);
+                    
+                    
+                    if (respuesta == 1)
                     {
-                        var (respuesta, mensaje) = await _categoria.validaCamposVacios(categorium);
-                        if (respuesta == 1)
+                        var resultado = await _categoria._validarCategoria(categorium);
+                        if (resultado == 1)
                         {
                             _context.Add(categorium);
                             await _context.SaveChangesAsync();
@@ -74,13 +76,14 @@ namespace CapaPresentacionAdmin.Controllers.Mantenedor
                         }
                         else
                         {
-                            ModelState.AddModelError(string.Empty, mensaje);
-                            return View(categorium);
+                            ModelState.AddModelError(string.Empty, $"La categoria ya existe");
+                            
                         }
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, $"La categoria ya existe");
+                        ModelState.AddModelError(string.Empty, mensaje);
+                        return View(categorium);
                     }
 
 

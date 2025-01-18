@@ -7,16 +7,18 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CapaEntidades.CapaEntidades;
 using CapaDatos;
+using CapaNegocio;
 
 namespace CapaPresentacionAdmin.Controllers.Mantenedor
 {
     public class MarcasController : Controller
     {
         private readonly DbcarritoContext _context;
-
-        public MarcasController(DbcarritoContext context)
+        private readonly MarcasService _marca;
+        public MarcasController(DbcarritoContext context, MarcasService marca)
         {
             _context = context;
+            _marca = marca;
         }
 
         // GET: Marcas
@@ -70,17 +72,28 @@ namespace CapaPresentacionAdmin.Controllers.Mantenedor
             {
                 if (ModelState.IsValid)
                 {
-                    var existe = await existeMarca(marca);
-                    if (!existe)
+                    var (respuesta, mensaje) = await _marca.validaCamposVacios(marca);
+
+                    if (respuesta == 1)
                     {
-                        _context.Add(marca);
-                        await _context.SaveChangesAsync();
-                        return RedirectToAction(nameof(Index));
+                        var existe = await existeMarca(marca);
+                        if (!existe)
+                        {
+                            _context.Add(marca);
+                            await _context.SaveChangesAsync();
+                            return RedirectToAction(nameof(Index));
+                        }
+                        else
+                        {
+                            ModelState.AddModelError(string.Empty, $"La marca ya existe");
+                        }
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, $"La marca ya existe");
+                        ModelState.AddModelError(string.Empty, mensaje);
+                        return View(marca);
                     }
+
 
                 }
             }
@@ -125,30 +138,40 @@ namespace CapaPresentacionAdmin.Controllers.Mantenedor
 
                 if (ModelState.IsValid)
                 {
-                    var existe = await existeMarca(marca);
-                    if (!existe)
+                    var (respuesta, mensaje) = await _marca.validaCamposVacios(marca);
+
+                    if (respuesta == 1)
                     {
-                        try
+                        var existe = await existeMarca(marca);
+                        if (!existe)
                         {
-                            _context.Update(marca);
-                            await _context.SaveChangesAsync();
+                            try
+                            {
+                                _context.Update(marca);
+                                await _context.SaveChangesAsync();
+                            }
+                            catch (DbUpdateConcurrencyException)
+                            {
+                                if (!MarcaExists(marca.IdMarca))
+                                {
+                                    return NotFound();
+                                }
+                                else
+                                {
+                                    throw;
+                                }
+                            }
+                            return RedirectToAction(nameof(Index));
                         }
-                        catch (DbUpdateConcurrencyException)
+                        else
                         {
-                            if (!MarcaExists(marca.IdMarca))
-                            {
-                                return NotFound();
-                            }
-                            else
-                            {
-                                throw;
-                            }
+                            ModelState.AddModelError(string.Empty, $"La marca ya existe");
+                            return View(marca);
                         }
-                        return RedirectToAction(nameof(Index));
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, $"La marca ya existe");
+                        ModelState.AddModelError(string.Empty, mensaje);
                         return View(marca);
                     }
                 }

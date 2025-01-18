@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using CapaNegocio;
 using CapaDatos;
 using CapaDominio;
+using CloudinaryDotNet;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,11 +13,22 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DbcarritoContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("connection")));
 
+var cloudinaryConfig = builder.Configuration.GetSection("Cloudinary");
+
+var cloudinary = new Cloudinary(new Account(
+    cloudinaryConfig["CloudName"],
+    cloudinaryConfig["ApiKey"],
+    cloudinaryConfig["ApiSecret"]
+    ));
+
+builder.Services.AddSingleton(cloudinary);
 // Registro de las capas de datos y negocio
 builder.Services.AddScoped<UsuarioService>(); 
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-builder.Services.AddScoped<ICategoriasRepository, CategoriasRepository>(); // Registro de interfaz e implementación
-builder.Services.AddScoped<CategoriaService>(); // El servicio de negocio que depende de ICategoriasRepository
+builder.Services.AddScoped<ICategoriasRepository, CategoriasRepository>(); 
+builder.Services.AddScoped<CategoriaService>(); 
+builder.Services.AddScoped<MarcasService>();
+builder.Services.AddScoped<ProductosService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
