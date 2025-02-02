@@ -8,7 +8,9 @@
 <h1 style="display: flex; justify-content:center;">Crear</h1>
 
 <h4 style="display: flex; justify-content:center;">Producto</h4>
+
 <hr />
+
 <div class="row" style="display: flex; justify-content:center;">
     <div class="col-md-4">
         <form asp-action="Create" method="post" enctype="multipart/form-data">
@@ -43,16 +45,16 @@
                 <label class="control-label">Marca</label>
                 <select asp-for="IdMarca" class="form-control" asp-items="ViewBag.IdMarca"></select>
             </div>
-
+            <div class="form-group mt-2" style="display: flex; justify-content:center;">
+                <input type="submit" value="Crear" class="btn btn-primary me-3" />
+                <a class="btn btn-danger" asp-action="Index">Regresar</a>
+            </div>
             
         </form>
     </div>
 </div>
 <br />
-<div class="form-group mt-2" style="display: flex; justify-content:center;">
-    <input type="submit" value="Crear" class="btn btn-primary me-3" />
-    <a class="btn btn-danger" asp-action="Index">Regresar</a>
-</div>
+
 <br/>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="/js/loadingoverlay.min.js"></script>

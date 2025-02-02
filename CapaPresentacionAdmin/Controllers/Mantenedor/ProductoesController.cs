@@ -141,6 +141,7 @@ namespace CapaPresentacionAdmin.Controllers.Mantenedor
             {
                 return NotFound();
             }
+
             ViewData["IdCategoria"] = new SelectList(_context.Categoria, "IdCategoria", "Descripcion");
             ViewData["IdMarca"] = new SelectList(_context.Marcas, "IdMarca", "Descripcion");
             return View(producto);
@@ -151,7 +152,7 @@ namespace CapaPresentacionAdmin.Controllers.Mantenedor
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdProducto,Nombre,Descripcion,Precio,Stock,RutaImagen,NombreImagen,Activo,FechaRegistro,IdMarca,IdCategoria")] Producto producto)
+        public async Task<IActionResult> Edit(int id, [Bind("IdProducto,Nombre,Descripcion,Precio,Stock,RutaImagen,NombreImagen,Activo,FechaRegistro,IdMarca,IdCategoria")] Producto producto, IFormFile? file)
         {
             if (id != producto.IdProducto)
             {
@@ -162,8 +163,37 @@ namespace CapaPresentacionAdmin.Controllers.Mantenedor
             {
                 try
                 {
+                    var nombreImagenExistente = await _context.Productos
+                     .Where(p => p.IdProducto == id)
+                     .Select(p => p.NombreImagen)  // Solo selecciona el nombre de la imagen
+                     .FirstOrDefaultAsync();
+                    var rutaImagenExistente = await _context.Productos
+                        .Where(p => p.IdProducto == id)
+                        .Select(p => p.RutaImagen)
+                        .FirstOrDefaultAsync();
+                    // Si ya existe un nombre de imagen, asignalo al producto
+                    producto.NombreImagen = nombreImagenExistente;
+                    producto.RutaImagen = rutaImagenExistente;
+                    // Verifica si hay un archivo para subir
+                    if (file != null && file.Length > 0)
+                    {
+                        var uploadParams = new ImageUploadParams()
+                        {
+                            File = new FileDescription(file.FileName, file.OpenReadStream()),
+                            AssetFolder = "ProductsImages"
+                        };
+                        var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+
+                        // Guarda la URL de Cloudinary en el producto
+                        producto.RutaImagen = uploadResult.SecureUrl.ToString();
+                        producto.NombreImagen = file.FileName;
+                        
+                    }
+
+                    // Actualiza el producto en la base de datos con la nueva URL
                     _context.Update(producto);
                     await _context.SaveChangesAsync();
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -178,8 +208,10 @@ namespace CapaPresentacionAdmin.Controllers.Mantenedor
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdCategoria"] = new SelectList(_context.Categoria, "IdCategoria", "Descripcion");
-            ViewData["IdMarca"] = new SelectList(_context.Marcas, "IdMarca", "Descripcion");
+
+            ViewData["IdCategoria"] = new SelectList(_context.Categoria, "IdCategoria", "Descripcion", producto.IdCategoria);
+            ViewData["IdMarca"] = new SelectList(_context.Marcas, "IdMarca", "Descripcion", producto.IdMarca);
+
             return View(producto);
         }
 
