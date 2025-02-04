@@ -13,16 +13,16 @@
 </head>
 <h1>Marcas</h1>
 <div class="card">
-    <div class="card-header">
+    <div class="card-header" style="background-color:#685752; color: white;">
         <i class="fas fa-list me-3"></i>Marcas
     </div>
-    <div class="card-body">
+    <div class="card-body" style="background-color: #997C70; color: white;">
         <p>
-            <a asp-action="Create" class="btn btn-success mt-1 mb-2">Nueva Marca</a>
+            <a asp-action="Create" class="btn mt-1 mb-2" style="background-color:#8EB486">Nueva Marca</a>
         </p>
         <table id="MarcaTable" class="table table-striped nowrap" style="width:100%; text-align: center; vertical-align: middle;">
             <thead >
-                <tr >
+                <tr style="color: #FDF7F4">
                     <th style="text-align: center; vertical-align: middle;">
                         Marca
                     </th>
@@ -38,27 +38,27 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>
+                        <td style="color: #FDF7F4">
                             @Html.DisplayFor(modelItem => item.Descripcion)
                         </td>
-                        <td>
+                        <td style="color: #FDF7F4">
                             @if (item.Activo == true)
                             {
-                                <span class="badge bg-success">Sí </span>
+                                <span class="badge" style="background-color: #B1C29E">Sí </span>
                             }
                             else
                             {
-                                <span class="badge bg-danger">No </span>
+                                <span class="badge" style="background-color: #E5989B">No </span>
                             }
                         </td>
-                        <td >
-                            <a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.IdMarca">
+                        <td style="color: #FDF7F4">
+                            <a asp-action="Edit" class="btn" style="background-color: #FADA7A" asp-route-id="@item.IdMarca">
                                 <i class="fas fa-pen-to-square"></i>
                             </a> |
-                            <a asp-action="Details" class="btn btn-primary" asp-route-id="@item.IdMarca">
+                            <a asp-action="Details" class="btn" style="background-color: #98D8EF" asp-route-id="@item.IdMarca">
                                 <i class="fas fa-eye"></i>
                             </a> |
-                            <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.IdMarca">
+                            <a asp-action="Delete" class="btn" style="background-color: #E5989B" asp-route-id="@item.IdMarca">
                                 <i class="fas fa-trash-can"></i>
                             </a>
                         </td>

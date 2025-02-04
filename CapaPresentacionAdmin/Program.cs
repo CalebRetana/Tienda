@@ -26,8 +26,12 @@ builder.Services.AddSingleton(cloudinary);
 builder.Services.AddScoped<UsuarioService>(); 
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<ICategoriasRepository, CategoriasRepository>(); 
+builder.Services.AddScoped<IProductoRepository, ProductoRepository>(); 
+builder.Services.AddScoped<IClienteRepository, ClienteRepository>(); 
+builder.Services.AddScoped<IVentaRepository, VentaRepository>(); 
 builder.Services.AddScoped<CategoriaService>(); 
 builder.Services.AddScoped<MarcasService>();
+builder.Services.AddScoped<IndexService>();
 builder.Services.AddScoped<ProductosService>();
 var app = builder.Build();
 
